@@ -36,6 +36,10 @@ namespace RedRover_be.Models
         [Required]
         public bool IsAdmin { get; set; } = false;
 
+        public bool IsActive { get; set; } = true;
+
+        public bool IsLoggedIn { get; set; } = false;
+
 
     }
 }

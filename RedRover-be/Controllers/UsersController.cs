@@ -21,6 +21,23 @@ namespace RedRover_be.Controllers
             _context = context;
         }
 
+        //Login
+        //Get: api/Users/username/password
+        [HttpGet("{username}/{password}")]
+        public async Task<ActionResult<User>> Login(string username, string password)
+        {
+            var user = await _context.User.SingleOrDefaultAsync(x => x.Username == username && x.Password == password);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
+
+
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
@@ -40,6 +57,57 @@ namespace RedRover_be.Controllers
             }
 
             return user;
+        }
+
+        // Update status Green
+        // PUT: api/User/5/Green
+        [HttpPut("{id}/green")]
+        public async Task<IActionResult> StatusGreen(int id)
+        {
+            var user = await _context.User.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Status = Models.User.Green;
+
+            return await PutUser(id, user);
+        }
+
+        // Update status Yellow
+        // PUT: api/User/5/Yellow
+        [HttpPut("{id}/yellow")]
+        public async Task<IActionResult> StatusYellow(int id)
+        {
+            var user = await _context.User.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Status = Models.User.Yellow;
+
+            return await PutUser(id, user);
+        }
+
+        // Update status Red
+        // PUT: api/User/5/Red
+        [HttpPut("{id}/red")]
+        public async Task<IActionResult> StatusRed(int id)
+        {
+            var user = await _context.User.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Status = Models.User.Red;
+
+            return await PutUser(id, user);
         }
 
         // PUT: api/Users/5

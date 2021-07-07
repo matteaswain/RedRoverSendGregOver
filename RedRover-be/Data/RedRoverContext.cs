@@ -15,5 +15,12 @@ namespace RedRover_be.Data
         }
 
         public DbSet<RedRover_be.Models.User> User { get; set; }
+
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>(u => { u.HasIndex(n => n.Username).IsUnique(); });
+        }
     }
 }

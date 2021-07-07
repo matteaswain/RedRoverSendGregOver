@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SystemService } from '../../misc/system.service';
+import {UserService} from '../user.service'
 
 @Component({
   selector: 'app-user-login',
@@ -7,8 +10,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserLoginComponent implements OnInit {
 
-  constructor() { }
 
+  username : string = "";
+  password : string ="";
+  message : string ="";
+
+
+  constructor(
+    private syssvs : SystemService,
+    private router : Router, 
+    private usersvs : UserService
+  )  {}
+
+
+  login () : void 
+  {
+
+    this.syssvs. loggedInUser = null;
+    this.usersvs.login(this.username,this.password).subscribe
+    (
+      res => {console.debug(res);
+      this.syssvs.loggedInUser = res;
+    console.log(this.syssvs.loggedInUser);},
+    err => {this.message= "Login Failed!"; console.error(err)}
+    );
+
+  }
   ngOnInit(): void {
   }
 

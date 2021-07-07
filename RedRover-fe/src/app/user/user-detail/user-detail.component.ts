@@ -16,9 +16,9 @@ export class UserDetailComponent implements OnInit {
   yellowUnlit: string = "assets/images/RRL-yellow-unlit.png";
   greenLit: string = "assets/images/RRL-green-lit.png";
   greenUnlit: string = "assets/images/RRL-green-unlit.png";
-  red: string = "";
-  yellow: string = "";
-  green: string = "";
+  red: string = this.redUnlit;
+  yellow: string = this.yellowUnlit;
+  green: string = this.greenLit;
 
   lightSwitch(light: string): void{
     switch(light){

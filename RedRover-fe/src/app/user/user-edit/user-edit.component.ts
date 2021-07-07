@@ -16,7 +16,7 @@ export class UserEditComponent implements OnInit {
 
   constructor(private syssvc: SystemService, private usersvc: UserService, private router: Router, private route: ActivatedRoute) { }
 
-  update(): void {
+  save(): void {
 
     this.usersvc.edit(this.user).subscribe(
       res =>{console.debug("Success", res);
@@ -28,6 +28,15 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.id = this.route.snapshot.params.id;
+    this.usersvc.getByPk(this.id).subscribe(
+      res =>{console.debug("Success", res);
+    this.user = res;
+  },
+  err =>{console.error(err);}
+    )
+
   }
 
 }

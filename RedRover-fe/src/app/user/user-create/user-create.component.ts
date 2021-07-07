@@ -16,13 +16,15 @@ export class UserCreateComponent implements OnInit {
   constructor(private syssvc: SystemService, private usersvc: UserService, private router: Router) { }
 
   save(): void {
-    
+    console.debug(this.user)
+    this.user.status = "GREEN";
+    this.user.isActive = true;
     this.usersvc.create(this.user).subscribe(
       res =>{console.debug("Success", res);
       this.router.navigateByUrl("/user/list");
   },
   err =>{console.error(err);}
-    )
+    );
 
   }
 

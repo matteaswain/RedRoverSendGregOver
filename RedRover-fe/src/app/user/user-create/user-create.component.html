@@ -1,1 +1,34 @@
-<p>user-create works!</p>
+<div>
+    <table class="table table-sm" style="width: 40%;">
+        <tr>
+            <td>Id:</td>
+            <td><input [(ngModel)]="user.id" type="number" disabled></td>
+        </tr>
+        <tr>
+            <td>Username:</td>
+            <td><input [(ngModel)]="user.username" type="text" ></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input [(ngModel)]="user.password" type="text" disabled></td>
+        </tr>
+        <tr>
+            <td>Firstname:</td>
+            <td><input [(ngModel)]="user.firstname" type="text" ></td>
+        </tr>
+        <tr>
+            <td>Lastname:</td>
+            <td><input [(ngModel)]="user.lastname" type="text" ></td>
+        </tr>
+        <tr>
+            <td>Status:</td>
+            <td><input [(ngModel)]="user.status" type="text" ></td>
+        </tr>       
+        <tr>
+            <td>IsAdmin:</td>
+            <td><input [(ngModel)]="user.isAdmin" type="checkbox" ></td>
+        </tr>
+       
+    </table>
+    <button (click)="save()" class="btn btn-primary">Save</button>
+</div>

@@ -34,6 +34,7 @@ export class UserLoginComponent implements OnInit {
     console.log(this.syssvs.loggedInUser);},
     err => {this.message= "Login Failed!"; console.error(err)}
     );
+    this.router.navigateByUrl("/user/list")
 
   }
   ngOnInit(): void {

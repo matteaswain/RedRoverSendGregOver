@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SystemService } from 'src/app/misc/system.service';
+import { User } from '../user.class';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -8,8 +10,9 @@ import { SystemService } from 'src/app/misc/system.service';
 })
 export class UserDetailComponent implements OnInit {
 
-  constructor(private syssvc: SystemService, ) { }
+  constructor(private syssvc: SystemService, private usersvc: UserService) { }
 
+  loggedInUser!: User;
   redLit: string = "assets/images/RRL-red-lit.png";
   redUnlit: string = "assets/images/RRL-red-unlit.png";
   yellowLit: string = "assets/images/RRL-yellow-lit.png";
@@ -22,16 +25,23 @@ export class UserDetailComponent implements OnInit {
 
   lightSwitch(light: string): void{
     switch(light){
-      case('red'): this.red = this.redLit;
+      case('red'): 
+      this.usersvc.statusRed(this.loggedInUser);
+      this.red = this.redLit;
       this.yellow = this.yellowUnlit;
       this.green = this.greenUnlit;
       break;
-      case('yellow'): this.yellow = this.yellowLit;
+      case('yellow'): 
+      this.usersvc.statusYellow(this.loggedInUser)
+      this.yellow = this.yellowLit;
       this.red = this.redUnlit;
       this.green = this.greenUnlit;
       break;
-      case('green'): this.lightReset();
+      case('green'): 
+      this.usersvc.statusGreen(this.loggedInUser)
+      this.lightReset();
     }
+    console.log(this.loggedInUser);
   }
 
   lightReset(): void{
@@ -41,6 +51,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   if(this.syssvc.loggedInUser != null) {this.loggedInUser = this.syssvc.loggedInUser}
   }
 
 }

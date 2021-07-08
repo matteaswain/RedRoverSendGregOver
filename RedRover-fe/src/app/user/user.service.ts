@@ -28,6 +28,18 @@ export class UserService {
   {
     return this.http.put(`${this.baseurl}/${user.id}`, user) as Observable<User>;
   }
+  statusRed(user: User): Observable<User>
+  {
+    return this.http.put(`${this.baseurl}/${user.id}/Red`, user) as Observable<User>;
+  }
+  statusYellow(user: User): Observable<User>
+  {
+    return this.http.put(`${this.baseurl}/${user.id}/Yellow`, user) as Observable<User>;
+  }
+  statusGreen(user: User): Observable<User>
+  {
+    return this.http.put(`${this.baseurl}/${user.id}/Green`, user) as Observable<User>;
+  }
   remove(id:number): Observable<User>
   {
     return this.http.delete(`${this.baseurl}/${id}`) as Observable<User>;

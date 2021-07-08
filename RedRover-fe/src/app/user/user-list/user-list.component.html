@@ -1,1 +1,33 @@
-<p>user-list works!</p>
+<div>
+    <input [(ngModel)]="searchCrit" type="text" placeholder="Search">
+</div>
+
+<table class="table table-sm">
+    <thead>
+        <tr>            
+            <th><button (click) = "sortFn('status')" class = "btn btn-link">Status</button></th>
+            <th><button (click) = "sortFn('firstname')" class = "btn btn-link">Name</button></th> 
+            <th>Username</th>           
+            <th>Is Logged In</th>           
+            <th>Is Active</th>           
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor= "let u of users | searchUser:searchCrit | sort:sortColumn:sortAsc">
+            <td>{{u.status}}</td>
+            <td>{{u.firstname}} {{u.lastname}}</td>     
+            <td>{{u.username}}</td>    
+            <td>{{u.isLoggedIn ? "YES" : "NO"}}</td>    
+            <td>{{u.isActive ? "YES" : "NO"}}</td>    
+            <td>            
+                <span>
+                    <a routerLink="/user/edit/{{u.id}}">Edit</a>
+                </span>
+            </td>           
+        </tr>
+    </tbody>
+</table>
+<div>
+    <a routerLink="/user/create">Create</a>
+</div>
